@@ -52,7 +52,7 @@ export const portfolioData = {
       subCategory: "Freelance Client Project",
       tech: ["HTML", "CSS", "JavaScript"],
       deployment: "Vercel",
-      repoUrl: "https://github.com/suryaprakashrajesh/flawless-photography",
+      repoUrl: "https://github.com/suryaprakashrajesh/flawless_webpage.git",
       description: "Built a fully responsive photography portfolio from scratch, optimized for mobile, tablet, and desktop. Engineered an interactive pricing section with dynamic filtering and CSS animations to boost engagement.",
       longDescription: "A pure frontend speedrun focusing on semantic HTML, clean CSS architecture, and highly engaging UI filters. Features a responsive grid structure for media layouts that remains stable during lazy loading.",
     },

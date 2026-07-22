@@ -48,7 +48,6 @@ export function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Extract all form fields directly from DOM form element using FormData
     const formData = new FormData(formRef.current);
 
     fetch('/', {
