@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
+import flawlessImg from '../assets/images/fawless_photography.png';
 
 // Interactive mini-carousel preview for Beniyel Nikson card
 function MiniCarousel() {
@@ -58,6 +59,25 @@ function MiniCarousel() {
 export function Projects() {
   const { projects } = portfolioData;
   const [filter, setFilter] = useState('All');
+  const [activeModalImage, setActiveModalImage] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveModalImage(null);
+      }
+    };
+    if (activeModalImage) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModalImage]);
 
   // Filter keys: All, React, JavaScript, Academic/Security
   const filterOptions = ['All', 'React', 'JavaScript', 'Academic/Security'];
@@ -148,6 +168,34 @@ export function Projects() {
 
                   {/* Dynamic Inline Preview for Beniyel Nikson Portfolio */}
                   {project.id === 'beniyel-nikson' && <MiniCarousel />}
+
+                  {/* Image Showcase Preview for Flawless Photography */}
+                  {project.id === 'flawless-photography' && (
+                    <div 
+                      onClick={() => setActiveModalImage({ src: flawlessImg, title: project.title })}
+                      className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
+                      role="button"
+                      tabIndex={0}
+                      aria-label="View Flawless Photography preview in full screen"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          setActiveModalImage({ src: flawlessImg, title: project.title });
+                        }
+                      }}
+                    >
+                      <img
+                        src={flawlessImg}
+                        alt={project.title}
+                        className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
+                        <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
+                          <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Bottom Row: Tech Stack & Action Links */}
@@ -198,6 +246,59 @@ export function Projects() {
         </motion.div>
 
       </div>
+
+      {/* Full-Screen Image Lightbox Modal */}
+      <AnimatePresence>
+        {activeModalImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setActiveModalImage(null)}
+            className="fixed inset-0 z-[99999] bg-bg/90 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-8 cursor-zoom-out select-none"
+          >
+            {/* Top Controls Bar */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center space-x-3 z-10">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveModalImage(null);
+                }}
+                className="p-2.5 rounded-full bg-card/90 text-text hover:text-accent border border-border hover:border-accent transition-colors duration-200 shadow-xl cursor-pointer flex items-center gap-2 font-mono text-xs"
+                aria-label="Close full screen view"
+              >
+                <span className="hidden sm:inline">Close (ESC)</span>
+                <FiX className="w-5 h-5 text-accent" />
+              </button>
+            </div>
+
+            {/* Title Header */}
+            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10 pointer-events-none">
+              <h4 className="text-lg md:text-xl font-display font-bold text-text">
+                {activeModalImage.title}
+              </h4>
+              <span className="font-mono text-xs text-text-secondary">Full Screen Showcase</span>
+            </div>
+
+            {/* Image Container */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-6xl max-h-[85vh] overflow-auto rounded-2xl border border-border/80 shadow-2xl bg-card relative cursor-default"
+            >
+              <img
+                src={activeModalImage.src}
+                alt={activeModalImage.title}
+                className="w-full h-auto object-contain max-h-[82vh] rounded-xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
