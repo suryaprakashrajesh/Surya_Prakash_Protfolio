@@ -41,6 +41,12 @@ export function Contact() {
     }
   };
 
+  const encodeData = (data) => {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -48,35 +54,42 @@ export function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Read keys from Vite environment config or default to standard placeholder for build
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_placeholder';
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_placeholder';
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'public_key_placeholder';
+    // Netlify Forms AJAX post payload
+    const formData = {
+      'form-name': 'contact',
+      ...formState,
+    };
 
-    if (serviceId === 'service_placeholder' || publicKey === 'public_key_placeholder') {
-      // Offline fallback demo simulation for testing
-      setTimeout(() => {
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeData(formData),
+    })
+      .then((response) => {
+        if (!response.ok && response.status !== 404) {
+          throw new Error('Netlify form submission error');
+        }
+
+        // Send via EmailJS as well if keys are configured
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        if (serviceId && templateId && publicKey) {
+          emailjs.sendForm(serviceId, templateId, formRef.current, publicKey).catch((err) => {
+            console.warn('EmailJS submission notice:', err);
+          });
+        }
+
         setIsSubmitting(false);
         setSubmitStatus('success');
         setFormState({ name: '', email: '', subject: '', message: '' });
-      }, 1500);
-      return;
-    }
-
-    emailjs
-      .sendForm(serviceId, templateId, formRef.current, publicKey)
-      .then(
-        () => {
-          setIsSubmitting(false);
-          setSubmitStatus('success');
-          setFormState({ name: '', email: '', subject: '', message: '' });
-        },
-        (error) => {
-          console.error('EmailJS submission error:', error);
-          setIsSubmitting(false);
-          setSubmitStatus('error');
-        }
-      );
+      })
+      .catch((error) => {
+        console.error('Submission error:', error);
+        setIsSubmitting(false);
+        setSubmitStatus('error');
+      });
   };
 
   return (
@@ -191,7 +204,20 @@ export function Contact() {
                 </motion.div>
               ) : (
                 // Form entry fields
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <form
+                  ref={formRef}
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  noValidate
+                >
+                  {/* Hidden fields required for Netlify Forms */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" />
+
                   {/* Name field */}
                   <div className="flex flex-col space-y-1.5">
                     <label htmlFor="form-name" className="text-xs font-mono font-medium text-text-secondary">

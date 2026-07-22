@@ -2,9 +2,8 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-/* CSS Variable Theme System */
+
 :root {
-  /* Dark Mode (Default Base Mode) */
   --bg: #09090B;
   --surface: #111318;
   --card: #16181D;
@@ -41,7 +40,9 @@
   }
 
   body {
-    @apply antialiased overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   /* Accessible keyboard navigation focus states (WCAG 2.2) */
@@ -68,12 +69,14 @@
   .text-gradient {
     background: linear-gradient(135deg, var(--text) 30%, var(--primary) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-accent {
     background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
