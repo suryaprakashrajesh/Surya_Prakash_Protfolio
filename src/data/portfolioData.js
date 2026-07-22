@@ -40,7 +40,7 @@ export const portfolioData = {
       subCategory: "Freelance Client Project",
       tech: ["React", "Vite", "CSS3", "JavaScript"],
       deployment: "Vercel",
-      repoUrl: "https://github.com/suryaprakashrajesh/beniyel-nikson-portfolio",
+      repoUrl: "https://github.com/suryaprakashrajesh/Beniyel_Nikson_Protfolio.git",
       description: "Built and deployed a responsive React/Vite portfolio for a video editor and YouTube thumbnail designer, with a broadcast-monitor visual theme. Designed a mobile-only auto-scrolling horizontal thumbnail carousel and resolved cross-device responsiveness issues across touch and desktop viewports. Implemented a diegetic dark/light mode toggle and refactored conflicting CSS systems for maintainability and performance.",
       longDescription: "This project was a deep dive into resolving real-world CSS conflicts. The client had conflicting styling rules from legacy modules that caused broken alignments on mobile. I untangled the CSS code from scratch, optimizing paint cycles and mobile touch carousel gestures, resulting in a layout that fits seamlessly from 320px screens up to large monitors.",
     },
