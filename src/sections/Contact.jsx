@@ -41,12 +41,6 @@ export function Contact() {
     }
   };
 
-  const encodeData = (data) => {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&');
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -54,16 +48,13 @@ export function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Netlify Forms AJAX post payload
-    const formData = {
-      'form-name': 'contact',
-      ...formState,
-    };
+    // Extract all form fields directly from DOM form element using FormData
+    const formData = new FormData(formRef.current);
 
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodeData(formData),
+      body: new URLSearchParams(formData).toString(),
     })
       .then((response) => {
         if (!response.ok && response.status !== 404) {
