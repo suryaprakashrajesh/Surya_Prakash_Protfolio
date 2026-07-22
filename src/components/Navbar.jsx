@@ -33,20 +33,31 @@ export function Navbar({ theme, toggleTheme }) {
   }, []);
 
   const handleLinkClick = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      // Offset scroll for header height
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      setMobileMenuOpen(false);
+    if (e) {
+      e.preventDefault();
     }
+    
+    // Close mobile menu drawer first
+    setMobileMenuOpen(false);
+
+    // Defer scroll calculation to next tick after drawer closes so touch events don't cancel smooth scroll
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = Math.max(0, elementPosition + window.scrollY - headerOffset);
+
+        try {
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        } catch {
+          window.scrollTo(0, offsetPosition);
+        }
+      }
+    }, 60);
   };
 
   return (
