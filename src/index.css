@@ -3,21 +3,8 @@
 @config "../tailwind.config.js";
 
 
-:root {
-  --bg: #09090B;
-  --surface: #111318;
-  --card: #16181D;
-  --primary: #3B82F6;
-  --accent: #5EEAD4;
-  --accent-border: #5EEAD4;
-  --text: #F4F4F5;
-  --text-secondary: #9CA3AF;
-  --success: #22C55E;
-  --border: rgba(255, 255, 255, 0.12);
-}
-
-:root.light, .light {
-  /* Light Mode (Polished, WCAG compliant contrast) */
+:root, :root.light, .light {
+  /* Light Mode (Default) */
   --bg: #FAFAFA;
   --surface: #FFFFFF;
   --card: #F4F4F5;
@@ -28,6 +15,20 @@
   --text-secondary: #475569; /* Slate-600 for solid contrast */
   --success: #16A34A;
   --border: rgba(0, 0, 0, 0.12);
+}
+
+:root.dark, .dark {
+  /* Dark Mode */
+  --bg: #09090B;
+  --surface: #111318;
+  --card: #16181D;
+  --primary: #3B82F6;
+  --accent: #5EEAD4;
+  --accent-border: #5EEAD4;
+  --text: #F4F4F5;
+  --text-secondary: #9CA3AF;
+  --success: #22C55E;
+  --border: rgba(255, 255, 255, 0.12);
 }
 
 @layer base {

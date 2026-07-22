@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return systemPrefersDark ? 'dark' : 'light';
+    return savedTheme || 'light';
   });
 
   useEffect(() => {
@@ -19,20 +17,6 @@ export function useTheme() {
     }
     localStorage.setItem('theme', theme);
   }, [theme]);
-
-  // Listen for live system dark/light theme changes when no explicit localStorage choice exists
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemThemeChange = (e) => {
-      const savedTheme = localStorage.getItem('theme');
-      if (!savedTheme) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleSystemThemeChange);
-    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
-  }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
