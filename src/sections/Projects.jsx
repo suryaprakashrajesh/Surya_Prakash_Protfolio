@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX, FiCheckCircle } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
 import flawlessImg from '../assets/images/fawless_photography.png';
+import beniyelImg from '../assets/images/beniyel_nikson_portfolio.png';
 
 // Interactive mini-carousel preview for Beniyel Nikson card
 function MiniCarousel() {
@@ -56,6 +57,35 @@ function MiniCarousel() {
           }
         }
       `}</style>
+    </div>
+  );
+}
+
+// Key features badge box for Flawless Photography card to balance layout height
+function FlawlessFeatures() {
+  const features = [
+    "Dynamic pricing filter with live updates",
+    "Interactive gallery with CSS filtering",
+    "WhatsApp & Maps integration for booking",
+    "Fully responsive across all devices",
+  ];
+
+  return (
+    <div className="mt-4 rounded-lg bg-surface/50 border border-border/80 p-3 select-none">
+      <span className="font-mono text-[9px] text-text-secondary uppercase tracking-widest block mb-2 font-medium">
+        Key Features
+      </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+        {features.map((feat, index) => (
+          <div
+            key={index}
+            className="flex items-start px-2.5 py-1.5 rounded text-[9.5px] font-mono border bg-accent/10 border-accent/25 text-accent leading-tight"
+          >
+            <FiCheckCircle className="mr-1.5 mt-0.5 flex-shrink-0 w-3 h-3 text-accent" />
+            <span className="break-words">{feat}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -170,42 +200,73 @@ export function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Dynamic Inline Preview for Beniyel Nikson Portfolio */}
-                  {project.id === 'beniyel-nikson' && <MiniCarousel />}
+                  {/* Image Showcase Preview for Beniyel Nikson Portfolio */}
+                  {project.id === 'beniyel-nikson' && (
+                    <>
+                      <div 
+                        onClick={() => setActiveModalImage({ src: beniyelImg, title: project.title })}
+                        className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
+                        role="button"
+                        tabIndex={0}
+                        aria-label="View Beniyel Nikson preview in full screen"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            setActiveModalImage({ src: beniyelImg, title: project.title });
+                          }
+                        }}
+                      >
+                        <img
+                          src={beniyelImg}
+                          alt={project.title}
+                          className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
+                          <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
+                            <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
+                          </span>
+                        </div>
+                      </div>
+                      <MiniCarousel />
+                    </>
+                  )}
 
                   {/* Image Showcase Preview for Flawless Photography */}
                   {project.id === 'flawless-photography' && (
-                    <div 
-                      onClick={() => setActiveModalImage({ src: flawlessImg, title: project.title })}
-                      className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
-                      role="button"
-                      tabIndex={0}
-                      aria-label="View Flawless Photography preview in full screen"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          setActiveModalImage({ src: flawlessImg, title: project.title });
-                        }
-                      }}
-                    >
-                      <img
-                        src={flawlessImg}
-                        alt={project.title}
-                        className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
-                        <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
-                          <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
-                        </span>
+                    <>
+                      <div 
+                        onClick={() => setActiveModalImage({ src: flawlessImg, title: project.title })}
+                        className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
+                        role="button"
+                        tabIndex={0}
+                        aria-label="View Flawless Photography preview in full screen"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            setActiveModalImage({ src: flawlessImg, title: project.title });
+                          }
+                        }}
+                      >
+                        <img
+                          src={flawlessImg}
+                          alt={project.title}
+                          className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
+                          <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
+                            <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                      <FlawlessFeatures />
+                    </>
                   )}
                 </div>
 
                 {/* Bottom Row: Tech Stack & Action Links */}
-                <div className="mt-8 space-y-6">
+                <div className="mt-4 space-y-4">
                   {/* Tech stack pills using JetBrains Mono */}
-                  <div className="flex flex-wrap gap-2 border-t border-border/40 pt-4">
+                  <div className="flex flex-wrap gap-2 border-t border-border/40 pt-3">
                     {project.tech.map((techItem) => (
                       <span
                         key={techItem}
