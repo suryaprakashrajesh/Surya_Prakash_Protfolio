@@ -16,17 +16,21 @@ function MiniCarousel() {
 
   return (
     <div className="mt-4 rounded-lg bg-surface/50 border border-border/80 p-3 select-none">
-      <span className="font-mono text-[9px] text-text-secondary/70 uppercase tracking-widest block mb-2">
+      <span className="font-mono text-[9px] text-text-secondary uppercase tracking-widest block mb-2 font-medium">
         Diegetic Mobile Carousel Demo (Auto-scroll)
       </span>
       {/* Container simulating a mobile horizontal view */}
-      <div className="w-full overflow-hidden relative h-10 border border-border/40 rounded bg-bg/80 flex items-center">
-        {/* Sliding marquee track */}
-        <div className="flex space-x-2 animate-marquee whitespace-nowrap absolute">
+      <div className="w-full overflow-hidden relative h-10 border border-border/60 rounded bg-bg/90 flex items-center">
+        {/* Edge fade gradients for polished visual clipping boundary */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-bg to-transparent z-10 rounded-l" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-3 bg-gradient-to-l from-bg to-transparent z-10 rounded-r" />
+
+        {/* Sliding marquee track pinned strictly at left-0 */}
+        <div className="flex items-center gap-2 animate-marquee whitespace-nowrap absolute left-0 top-0 h-full w-max">
           {[...thumbnails, ...thumbnails].map((item, index) => (
             <div
               key={index}
-              className={`inline-flex items-center px-2.5 py-1 rounded text-[9px] font-mono border ${item.color}`}
+              className={`inline-flex items-center px-2.5 py-1 rounded text-[9px] font-mono border shrink-0 ${item.color}`}
             >
               <FiMonitor className="mr-1 flex-shrink-0 w-3 h-3" />
               <span>{item.text}</span>
@@ -111,10 +115,10 @@ export function Projects() {
             <button
               key={opt}
               onClick={() => setFilter(opt)}
-              className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wide transition-all duration-300 border ${
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-medium tracking-wide transition-all duration-300 border ${
                 filter === opt
-                  ? 'bg-primary text-[#FFFFFF] border-primary shadow-md shadow-primary/10'
-                  : 'bg-card text-text-secondary border-border hover:border-accent hover:text-accent'
+                  ? 'bg-primary text-[#FFFFFF] border-primary shadow-md shadow-primary/20 font-semibold scale-[1.02]'
+                  : 'bg-card text-text-secondary border-border hover:border-accent hover:text-text hover:shadow-sm'
               }`}
             >
               {opt}
