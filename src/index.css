@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* CSS Variable Theme System */
+:root {
+  /* Dark Mode (Default Base Mode) */
+  --bg: #09090B;
+  --surface: #111318;
+  --card: #16181D;
+  --primary: #3B82F6;
+  --accent: #5EEAD4;
+  --accent-border: #5EEAD4;
+  --text: #F4F4F5;
+  --text-secondary: #9CA3AF;
+  --success: #22C55E;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+:root.light, .light {
+  /* Light Mode (Polished, WCAG compliant contrast) */
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --card: #F4F4F5;
+  --primary: #2563EB;
+  --accent: #0F766E; /* Teal 700 for text/button labels > 4.5:1 ratio */
+  --accent-border: #0D9488; /* Teal 600 for borders/icons */
+  --text: #18181B;
+  --text-secondary: #52525B;
+  --success: #16A34A;
+  --border: rgba(0, 0, 0, 0.08);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    @apply antialiased overflow-x-hidden;
+  }
+
+  /* Accessible keyboard navigation focus states (WCAG 2.2) */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+/* Utilities and Custom Components */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--text) 30%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glassmorphic elements */
+  .glass-nav {
+    background-color: rgba(9, 9, 11, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .light .glass-nav {
+    background-color: rgba(250, 250, 250, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Custom styles for animations, active links, scroll-bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--primary);
+  color: #FFFFFF;
+}
+
+/* Disable decorative motion for users who prefer reduced motion, while retaining hover color feedback */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide native OS cursor on desktop pointer devices when CustomCursor component is mounted */
+@media (hover: hover) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select,
+  html.has-custom-cursor [role="button"] {
+    cursor: none !important;
+  }
+}
+
+/* Hardware-accelerated 120 FPS cursor ring styles */
+.cursor-lens {
+  background-color: var(--accent);
+  border: 1.5px solid transparent;
+  box-shadow: 0 0 4px var(--accent);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease-out, border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+}
+
+.cursor-lens.is-hovering {
+  background-color: transparent !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 6px var(--accent) !important;
+}

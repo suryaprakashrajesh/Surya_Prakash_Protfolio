@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Surya Prakash R | Premium Portfolio | Frontend Developer</title>
+    <meta name="description" content="Portfolio of Surya Prakash R, a premium Front-End Developer based in Chennai, specializing in React, high-performance web applications, and CSS architectures." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Surya Prakash R | Frontend Developer" />
+    <meta property="og:description" content="Portfolio of Surya Prakash R, specializing in React, high-performance web applications, and clean UI engineering." />
+    <meta property="og:image" content="/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Surya Prakash R | Frontend Developer" />
+    <meta property="twitter:description" content="Portfolio of Surya Prakash R, specializing in React, high-performance web applications, and clean UI engineering." />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Inline script to prevent Flash of Unstyled Theme (FOUC) -->
+    <script>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-bg text-text transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
