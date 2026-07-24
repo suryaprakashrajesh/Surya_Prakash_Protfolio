@@ -26,6 +26,7 @@ export const portfolioData = {
     { name: "Vercel", category: "Tools & Platforms" },
     { name: "Firebase", category: "Tools & Platforms" },
     { name: "VS Code", category: "Tools & Platforms" },
+    { name: "Figma", category: "Tools & Platforms" },
     { name: "Spring Boot", category: "Currently Learning" },
     { name: "Node.js", category: "Currently Learning" },
     { name: "Express.js", category: "Currently Learning" },
@@ -42,6 +43,13 @@ export const portfolioData = {
       deployment: "Vercel",
       liveUrl: "https://beniyel-nikson-protfolio.vercel.app",
       repoUrl: "https://github.com/suryaprakashrajesh/Beniyel_Nikson_Protfolio.git",
+      images: [
+        "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio.png",
+        "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_2.png",
+        "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_3.png",
+        "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_4.png",
+        "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_5.png"
+      ],
       description: "Built and deployed a responsive React/Vite portfolio for a video editor and YouTube thumbnail designer, with a broadcast-monitor visual theme. Designed a mobile-only auto-scrolling horizontal thumbnail carousel and resolved cross-device responsiveness issues across touch and desktop viewports. Implemented a diegetic dark/light mode toggle and refactored conflicting CSS systems for maintainability and performance.",
       longDescription: "This project was a deep dive into resolving real-world CSS conflicts. The client had conflicting styling rules from legacy modules that caused broken alignments on mobile. I untangled the CSS code from scratch, optimizing paint cycles and mobile touch carousel gestures, resulting in a layout that fits seamlessly from 320px screens up to large monitors.",
     },
@@ -55,6 +63,13 @@ export const portfolioData = {
       deployment: "Vercel",
       liveUrl: "https://flawlessphotography.vercel.app/",
       repoUrl: "https://github.com/suryaprakashrajesh/flawless_webpage.git",
+      images: [
+        "/src/assets/images/fawless_photography/fawless_photography.png",
+        "/src/assets/images/fawless_photography/fawless_photography_2 (2).png",
+        "/src/assets/images/fawless_photography/fawless_photography_3.png",
+        "/src/assets/images/fawless_photography/fawless_photography_4.png",
+        "/src/assets/images/fawless_photography/fawless_photography_5.png"
+      ],
       description: "Built a fully responsive photography portfolio from scratch, optimized for mobile, tablet, and desktop. Engineered an interactive pricing section with dynamic filtering and CSS animations to boost engagement.",
       longDescription: "A pure frontend speedrun focusing on semantic HTML, clean CSS architecture, and highly engaging UI filters. Features a responsive grid structure for media layouts that remains stable during lazy loading.",
     },
@@ -67,8 +82,35 @@ export const portfolioData = {
       tech: ["Python Flask", "HTML", "CSS", "JavaScript", "OpenCV", "Pyzbar"],
       deployment: "Local Environment / Repository",
       repoUrl: "https://github.com/suryaprakashrajesh/Adaptive-Financial-Security-Framework.git",
+      images: [
+        "/src/assets/images/Adaptive Financial Security Framework/financial-security_1.png",
+        "/src/assets/images/Adaptive Financial Security Framework/financial-security_2.png",
+        "/src/assets/images/Adaptive Financial Security Framework/financial-security_3.png",
+        "/src/assets/images/Adaptive Financial Security Framework/financial-security_4.png",
+        "/src/assets/images/Adaptive Financial Security Framework/financial-security_5.png"
+      ],
       description: "Designed a QR-code-based ATM authentication system to prevent unauthorized transactions, integrating OpenCV and Pyzbar for accurate scanning under varied lighting conditions.",
       longDescription: "Developed for Sri Krishna Engineering College, this framework adds a QR validation layer to ATMs to prevent card skimming attacks. Programmed camera lighting adaptation thresholds to read QR codes even in low-light ATM booths.",
+    },
+    {
+      id: "genshin-library",
+      title: "Genshin Library",
+      date: "2026",
+      category: "personal",
+      subCategory: "Personal Project",
+      tech: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "Multer"],
+      deployment: "Vercel",
+      liveUrl: "https://genshin-library.vercel.app/",
+      repoUrl: "https://github.com/suryaprakashrajesh/Genshin-Library.git",
+      images: [
+        "/src/assets/images/genshin_library/genshin_library.png",
+        "/src/assets/images/genshin_library/genshin_library_2.png",
+        "/src/assets/images/genshin_library/genshin_library_3.png",
+        "/src/assets/images/genshin_library/genshin_library_4.png",
+        "/src/assets/images/genshin_library/genshin_library_5.png"
+      ],
+      description: "Built a full-stack Genshin Impact fan photo gallery with a Node.js/Express backend and Multer-powered image upload API. Implemented element-based filtering (Pyro, Hydro, Anemo, Electro, Cryo, Geo, Dendro, Archon), live search with autocomplete suggestions, a lightbox image modal with prev/next navigation, and a JSON flat-file database for persisting uploaded image metadata.",
+      longDescription: "A full-stack fan photo gallery web application for Genshin Impact. Built with a Node.js and Express backend featuring a Multer-powered image upload API and JSON flat-file data persistence. The frontend delivers element-based gallery filtering, character autocomplete search, responsive glassmorphic UI, lightbox navigation modal, and image tagging.",
     },
   ],
   experience: [

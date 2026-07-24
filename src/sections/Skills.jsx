@@ -23,7 +23,8 @@ import {
   SiVercel, 
   SiSpringboot, 
   SiExpress, 
-  SiTailwindcss 
+  SiTailwindcss,
+  SiFigma
 } from 'react-icons/si';
 import { TbBrandVscode } from 'react-icons/tb';
 
@@ -52,6 +53,7 @@ const skillIcons = {
   "Vercel": <SiVercel className="w-4 h-4 text-text" />,
   "Firebase": <SiFirebase className="w-4 h-4 text-[#FFCA28]" />,
   "VS Code": <TbBrandVscode className="w-4 h-4 text-[#007ACC]" />,
+  "Figma": <SiFigma className="w-4 h-4 text-[#F24E1E]" />,
   "Spring Boot": <SiSpringboot className="w-4 h-4 text-[#6DB33F]" />,
   "Node.js": <FaNodeJs className="w-4 h-4 text-[#339933]" />,
   "Express.js": <SiExpress className="w-4 h-4 text-text" />,

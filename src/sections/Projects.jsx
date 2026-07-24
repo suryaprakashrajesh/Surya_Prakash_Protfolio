@@ -1,9 +1,37 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX, FiCheckCircle } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX, FiCheckCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
-import flawlessImg from '../assets/images/fawless_photography.png';
-import beniyelImg from '../assets/images/beniyel_nikson_portfolio.png';
+
+// Beniyel Nikson Portfolio Images
+import beniyelImg1 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio.png';
+import beniyelImg2 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_2.png';
+import beniyelImg3 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_3.png';
+import beniyelImg4 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_4.png';
+import beniyelImg5 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_5.png';
+
+// Flawless Photography Images
+import flawlessImg1 from '../assets/images/fawless_photography/fawless_photography.png';
+import flawlessImg2 from '../assets/images/fawless_photography/fawless_photography_2 (2).png';
+import flawlessImg3 from '../assets/images/fawless_photography/fawless_photography_3.png';
+import flawlessImg4 from '../assets/images/fawless_photography/fawless_photography_4.png';
+import flawlessImg5 from '../assets/images/fawless_photography/fawless_photography_5.png';
+
+// Adaptive Financial Security Framework Images
+import financialImg1 from '../assets/images/Adaptive Financial Security Framework/financial-security_1.png';
+import financialImg2 from '../assets/images/Adaptive Financial Security Framework/financial-security_2.png';
+import financialImg3 from '../assets/images/Adaptive Financial Security Framework/financial-security_3.png';
+import financialImg4 from '../assets/images/Adaptive Financial Security Framework/financial-security_4.png';
+import financialImg5 from '../assets/images/Adaptive Financial Security Framework/financial-security_5.png';
+
+// Genshin Library Images
+import genshinImg1 from '../assets/images/genshin_library/genshin_library.png';
+import genshinImg2 from '../assets/images/genshin_library/genshin_library_2.png';
+import genshinImg3 from '../assets/images/genshin_library/genshin_library_3.png';
+import genshinImg4 from '../assets/images/genshin_library/genshin_library_4.png';
+import genshinImg5 from '../assets/images/genshin_library/genshin_library_5.png';
+
+import { ProjectImageCarousel } from '../components/ProjectImageCarousel';
 
 // Interactive mini-carousel preview for Beniyel Nikson card
 function MiniCarousel() {
@@ -90,6 +118,67 @@ function FlawlessFeatures() {
   );
 }
 
+// Key features badge box for Genshin Library card
+function GenshinFeatures() {
+  const features = [
+    "Filterable gallery by element",
+    "Autocomplete character search",
+    "Image upload with tagging",
+    "Glassmorphic navbar with active indicators",
+    "Responsive hamburger menu on mobile",
+  ];
+
+  return (
+    <div className="mt-4 rounded-lg bg-surface/50 border border-border/80 p-3 select-none">
+      <span className="font-mono text-[9px] text-text-secondary uppercase tracking-widest block mb-2 font-medium">
+        Key Features
+      </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+        {features.map((feat, index) => (
+          <div
+            key={index}
+            className="flex items-start px-2.5 py-1.5 rounded text-[9.5px] font-mono border bg-accent/10 border-accent/25 text-accent leading-tight"
+          >
+            <FiCheckCircle className="mr-1.5 mt-0.5 flex-shrink-0 w-3 h-3 text-accent" />
+            <span className="break-words">{feat}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Key features badge box for Adaptive Financial Security Framework card
+function FinancialSecurityFeatures() {
+  const features = [
+    "QR ATM camera scanning auth",
+    "Role-based account access control",
+    "JSON persistent balance storage",
+    "Companion mobile QR banking app",
+    "HTTPS local server with SSL security",
+    "Full scan-confirm transaction flow",
+  ];
+
+  return (
+    <div className="mt-4 rounded-lg bg-surface/50 border border-border/80 p-3 select-none">
+      <span className="font-mono text-[9px] text-text-secondary uppercase tracking-widest block mb-2 font-medium">
+        Key Features
+      </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+        {features.map((feat, index) => (
+          <div
+            key={index}
+            className="flex items-start px-2.5 py-1.5 rounded text-[9.5px] font-mono border bg-accent/10 border-accent/25 text-accent leading-tight"
+          >
+            <FiCheckCircle className="mr-1.5 mt-0.5 flex-shrink-0 w-3 h-3 text-accent" />
+            <span className="break-words">{feat}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Projects() {
   const { projects } = portfolioData;
   const [filter, setFilter] = useState('All');
@@ -113,13 +202,33 @@ export function Projects() {
     };
   }, [activeModalImage]);
 
-  // Filter keys: All, React, JavaScript, Academic/Security
-  const filterOptions = ['All', 'React', 'JavaScript', 'Academic/Security'];
+  // Map project IDs to imported image arrays for Vite bundling
+  const getProjectImages = (project) => {
+    if (project.id === 'beniyel-nikson') {
+      return [beniyelImg1, beniyelImg2, beniyelImg3, beniyelImg4, beniyelImg5];
+    }
+    if (project.id === 'flawless-photography') {
+      return [flawlessImg1, flawlessImg2, flawlessImg3, flawlessImg4, flawlessImg5];
+    }
+    if (project.id === 'financial-security') {
+      return [financialImg1, financialImg2, financialImg3, financialImg4, financialImg5];
+    }
+    if (project.id === 'genshin-library') {
+      return [genshinImg1, genshinImg2, genshinImg3, genshinImg4, genshinImg5];
+    }
+    if (project.images && project.images.length > 0) return project.images;
+    if (project.image) return [project.image];
+    return [];
+  };
+
+  // Filter keys: All, React, JavaScript, Node.js, Academic/Security
+  const filterOptions = ['All', 'React', 'JavaScript', 'Node.js', 'Academic/Security'];
 
   const filteredProjects = projects.filter((project) => {
     if (filter === 'All') return true;
     if (filter === 'React') return project.tech.includes('React');
     if (filter === 'JavaScript') return project.tech.includes('JavaScript') || project.tech.includes('JS');
+    if (filter === 'Node.js') return project.tech.includes('Node.js') || project.tech.includes('Express');
     if (filter === 'Academic/Security') return project.category === 'academic';
     return true;
   });
@@ -166,6 +275,7 @@ export function Projects() {
               const isOddTotal = filteredProjects.length % 2 !== 0;
               const isLastItem = index === filteredProjects.length - 1;
               const shouldCenter = isOddTotal && isLastItem;
+              const projectImages = getProjectImages(project);
 
               return (
                 <motion.div
@@ -200,67 +310,22 @@ export function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Image Showcase Preview for Beniyel Nikson Portfolio */}
-                  {project.id === 'beniyel-nikson' && (
-                    <>
-                      <div 
-                        onClick={() => setActiveModalImage({ src: beniyelImg, title: project.title })}
-                        className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
-                        role="button"
-                        tabIndex={0}
-                        aria-label="View Beniyel Nikson preview in full screen"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            setActiveModalImage({ src: beniyelImg, title: project.title });
-                          }
-                        }}
-                      >
-                        <img
-                          src={beniyelImg}
-                          alt={project.title}
-                          className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
-                          <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
-                            <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
-                          </span>
-                        </div>
-                      </div>
-                      <MiniCarousel />
-                    </>
+                  {/* Project Image Carousel */}
+                  {projectImages.length > 0 && (
+                    <ProjectImageCarousel
+                      images={projectImages}
+                      title={project.title}
+                      onImageClick={(src, imgIndex, list) =>
+                        setActiveModalImage({ src, title: project.title, index: imgIndex, list })
+                      }
+                    />
                   )}
 
-                  {/* Image Showcase Preview for Flawless Photography */}
-                  {project.id === 'flawless-photography' && (
-                    <>
-                      <div 
-                        onClick={() => setActiveModalImage({ src: flawlessImg, title: project.title })}
-                        className="mt-4 rounded-xl border border-border/80 overflow-hidden bg-surface/50 group/img relative shadow-sm cursor-pointer"
-                        role="button"
-                        tabIndex={0}
-                        aria-label="View Flawless Photography preview in full screen"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            setActiveModalImage({ src: flawlessImg, title: project.title });
-                          }
-                        }}
-                      >
-                        <img
-                          src={flawlessImg}
-                          alt={project.title}
-                          className="w-full h-48 md:h-52 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5">
-                          <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
-                            <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
-                          </span>
-                        </div>
-                      </div>
-                      <FlawlessFeatures />
-                    </>
-                  )}
+                  {/* Extra feature widgets */}
+                  {project.id === 'beniyel-nikson' && <MiniCarousel />}
+                  {project.id === 'flawless-photography' && <FlawlessFeatures />}
+                  {project.id === 'financial-security' && <FinancialSecurityFeatures />}
+                  {project.id === 'genshin-library' && <GenshinFeatures />}
                 </div>
 
                 {/* Bottom Row: Tech Stack & Action Links */}
@@ -343,7 +408,9 @@ export function Projects() {
               <h4 className="text-lg md:text-xl font-display font-bold text-text">
                 {activeModalImage.title}
               </h4>
-              <span className="font-mono text-xs text-text-secondary">Full Screen Showcase</span>
+              <span className="font-mono text-xs text-text-secondary">
+                Full Screen Showcase {activeModalImage.list?.length > 1 ? `(${activeModalImage.list.indexOf(activeModalImage.src) + 1}/${activeModalImage.list.length})` : ''}
+              </span>
             </div>
 
             {/* Image Container */}
@@ -353,13 +420,46 @@ export function Projects() {
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-6xl max-h-[85vh] overflow-auto rounded-2xl border border-border/80 shadow-2xl bg-card relative cursor-default"
+              className="max-w-6xl max-h-[85vh] overflow-hidden rounded-2xl border border-border/80 shadow-2xl bg-card relative cursor-default flex items-center justify-center"
             >
               <img
                 src={activeModalImage.src}
                 alt={activeModalImage.title}
                 className="w-full h-auto object-contain max-h-[82vh] rounded-xl"
               />
+
+              {/* Lightbox Navigation controls if multiple images */}
+              {activeModalImage.list && activeModalImage.list.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
+                      const prevIdx = currentIdx === 0 ? activeModalImage.list.length - 1 : currentIdx - 1;
+                      setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[prevIdx] });
+                    }}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 hover:bg-black/95 border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-sm"
+                  >
+                    <FiChevronLeft className="w-6 h-6 text-accent" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
+                      const nextIdx = currentIdx === activeModalImage.list.length - 1 ? 0 : currentIdx + 1;
+                      setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[nextIdx] });
+                    }}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 hover:bg-black/95 border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-sm"
+                  >
+                    <FiChevronRight className="w-6 h-6 text-accent" />
+                  </button>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
