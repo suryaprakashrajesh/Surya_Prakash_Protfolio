@@ -4,16 +4,16 @@ import { FiCheckSquare, FiMapPin, FiCpu, FiCode } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
 
 // Dynamic CountUp component using standard requestAnimationFrame for maximum rendering stability
-function StatCounter({ target, suffix = '', decimals = 0, duration = 2000 }) {
+function StatCounter({ target, suffix = '', decimals = 0, duration = 1800 }) {
   const [count, setCount] = useState(0);
   const elementRef = useRef(null);
-  const isInView = useInView(elementRef, { once: true, margin: '-100px' });
+  const isInView = useInView(elementRef, { once: true, amount: 0.1 });
 
   useEffect(() => {
     if (!isInView) return;
 
     let startTime = null;
-    const endValue = parseFloat(target);
+    const endValue = parseFloat(target) || 0;
 
     const animateCount = (timestamp) => {
       if (!startTime) startTime = timestamp;
