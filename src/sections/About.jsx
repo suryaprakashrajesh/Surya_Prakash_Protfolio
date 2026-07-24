@@ -119,7 +119,7 @@ export function About() {
               className="p-6 bg-card border border-border rounded-2xl flex flex-col justify-between"
             >
               <div className="font-display text-4xl font-extrabold text-primary mb-4">
-                <StatCounter target="3" />
+                <StatCounter target="4" />
               </div>
               <div className="space-y-1">
                 <h3 className="font-display text-sm font-semibold text-text">
