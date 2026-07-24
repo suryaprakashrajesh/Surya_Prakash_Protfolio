@@ -5,6 +5,7 @@ export const portfolioData = {
     subtitle: "Frontend Developer crafting modern, responsive, and user-focused web experiences with React, JavaScript, and modern web technologies.",
     email: "suryarajesh.tbm@gmail.com",
     phone: "+91 7305511793",
+    whatsapp: "https://wa.me/917305511793",
     location: "Tambaram, Chennai 600045, India",
     github: "https://github.com/suryaprakashrajesh",
     linkedin: "https://linkedin.com/in/surya-prakash-r1793",
@@ -41,7 +42,8 @@ export const portfolioData = {
       subCategory: "Freelance Client Project",
       tech: ["React", "Vite", "CSS3", "JavaScript"],
       deployment: "Vercel",
-      liveUrl: "https://beniyel-nikson-protfolio.vercel.app",
+      liveUrl: "",
+      //https://beniyel-nikson-protfolio.vercel.app
       repoUrl: "https://github.com/suryaprakashrajesh/Beniyel_Nikson_Protfolio.git",
       images: [
         "/src/assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio.png",

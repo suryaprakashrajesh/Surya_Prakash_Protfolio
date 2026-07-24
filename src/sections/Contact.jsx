@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiMail, FiPhone, FiGithub, FiLinkedin, FiSend, FiCheckCircle } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolioData';
 
 export function Contact() {
-  const { email, phone, location, github, linkedin } = portfolioData.personalInfo;
+  const { email, phone, whatsapp, location, github, linkedin } = portfolioData.personalInfo;
   
   const formRef = useRef();
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
@@ -143,6 +144,19 @@ export function Contact() {
                 </div>
                 <span>{phone}</span>
               </a>
+
+              {/* WhatsApp Direct */}
+              <a
+                href={whatsapp || "https://wa.me/917305511793"}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center space-x-3.5 text-text-secondary hover:text-success transition-colors duration-300 w-fit"
+              >
+                <div className="p-2.5 rounded-lg bg-card border border-border text-success">
+                  <FaWhatsapp className="w-4 h-4" />
+                </div>
+                <span>{phone} (WhatsApp)</span>
+              </a>
             </div>
 
             {/* Social profiles */}
@@ -164,6 +178,15 @@ export function Contact() {
                 className="p-3 rounded-xl bg-card border border-border text-text hover:text-accent hover:border-accent transition-all duration-300"
               >
                 <FiLinkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={whatsapp || "https://wa.me/917305511793"}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp Direct Message"
+                className="p-3 rounded-xl bg-card border border-border text-text hover:text-success hover:border-success transition-all duration-300"
+              >
+                <FaWhatsapp className="w-5 h-5" />
               </a>
             </div>
           </div>

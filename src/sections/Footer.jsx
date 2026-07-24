@@ -1,8 +1,9 @@
 import { FiArrowUp, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { portfolioData } from '../data/portfolioData';
 
 export function Footer() {
-  const { name, github, linkedin, email } = portfolioData.personalInfo;
+  const { name, github, linkedin, email, whatsapp } = portfolioData.personalInfo;
 
   const handleBackToTop = () => {
     window.scrollTo({
@@ -76,6 +77,15 @@ export function Footer() {
               className="p-2 rounded-lg bg-card border border-border text-text-secondary hover:text-accent hover:border-accent transition-colors duration-300"
             >
               <FiLinkedin className="w-4.5 h-4.5" />
+            </a>
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp Direct Message"
+              className="p-2 rounded-lg bg-card border border-border text-text-secondary hover:text-success hover:border-success transition-colors duration-300"
+            >
+              <FaWhatsapp className="w-4.5 h-4.5" />
             </a>
             <a
               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
