@@ -6,7 +6,7 @@ export function Certifications() {
   const { certifications } = portfolioData;
 
   return (
-    <section id="certifications" className="py-24 bg-bg relative">
+    <section id="certifications" className="py-24 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}

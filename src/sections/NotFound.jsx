@@ -16,7 +16,7 @@ export function NotFound() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-6 text-center select-none relative overflow-hidden">
+    <div className="min-h-screen bg-bg flex flex-col items-center justify-center p-6 text-center select-none relative z-10 overflow-hidden">
       <Helmet>
         <title>404 — Page Not Found | Surya Prakash R</title>
         <meta name="description" content="The page you are looking for does not exist in Surya Prakash R's portfolio system." />

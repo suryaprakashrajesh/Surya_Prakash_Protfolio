@@ -26,7 +26,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-bg border-t border-border/60 py-12 relative overflow-hidden">
+    <footer className="bg-transparent border-t border-border/60 py-12 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         
         {/* Left Side: Logo and Copyright */}

@@ -234,7 +234,7 @@ export function Projects() {
   });
 
   return (
-    <section id="projects" className="py-24 bg-surface border-b border-border/50 relative">
+    <section id="projects" className="py-24 bg-surface/30 backdrop-blur-[2px] border-b border-border/50 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}

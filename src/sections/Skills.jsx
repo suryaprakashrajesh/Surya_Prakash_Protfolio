@@ -91,7 +91,7 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 bg-bg relative">
+    <section id="skills" className="py-24 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}

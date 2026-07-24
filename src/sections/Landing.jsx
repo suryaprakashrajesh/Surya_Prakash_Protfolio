@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTheme } from '../hooks/useTheme';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../sections/Hero';
+import { PixelRevealTransition } from '../components/PixelRevealTransition';
 import { About } from '../sections/About';
 import { Skills } from '../sections/Skills';
 import { Projects } from '../sections/Projects';
@@ -36,17 +37,24 @@ export function Landing() {
       {showIntro && <IntroLoader onFinish={handleIntroFinish} />}
 
       {/* Main page content is mounted immediately in the DOM */}
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen relative z-10">
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         
         <main className="flex-grow">
           <Hero theme={theme} toggleTheme={toggleTheme} />
+          <PixelRevealTransition theme={theme} targetColorType="surface" startOffset="normal" />
           <About />
+          <PixelRevealTransition theme={theme} targetColorType="bg" startOffset="late" />
           <Skills />
+          <PixelRevealTransition theme={theme} targetColorType="surface" startOffset="late" />
           <Projects />
+          <PixelRevealTransition theme={theme} targetColorType="bg" startOffset="normal" />
           <Experience />
+          <PixelRevealTransition theme={theme} targetColorType="surface" startOffset="late" />
           <Education />
+          <PixelRevealTransition theme={theme} targetColorType="bg" startOffset="late" />
           <Certifications />
+          <PixelRevealTransition theme={theme} targetColorType="surface" startOffset="late" />
           <Contact />
         </main>
 

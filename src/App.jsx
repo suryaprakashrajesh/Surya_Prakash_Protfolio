@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './components/ScrollProgress';
+import { AuroraBackground } from './components/AuroraBackground';
 
 // Lazy loaded page nodes
 const Landing = lazy(() => import('./sections/Landing'));
@@ -22,6 +23,7 @@ export default function App() {
     <HelmetProvider>
       <Router>
         {/* Universal UI decorations */}
+        <AuroraBackground />
         <ScrollProgress />
         <CustomCursor />
         

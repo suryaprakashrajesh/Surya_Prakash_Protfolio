@@ -6,7 +6,7 @@ export function Education() {
   const { education } = portfolioData;
 
   return (
-    <section id="education" className="py-24 bg-surface border-y border-border/50 relative">
+    <section id="education" className="py-24 bg-surface/30 backdrop-blur-[2px] border-y border-border/50 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}

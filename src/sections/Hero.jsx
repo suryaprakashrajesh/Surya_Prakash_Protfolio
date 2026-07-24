@@ -126,7 +126,7 @@ export function Hero({ theme, toggleTheme }) {
   return (
     <section
       id="home"
-      className="min-h-screen relative flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg"
+      className="min-h-screen relative flex items-center justify-center pt-24 pb-16 overflow-hidden bg-transparent"
     >
       {/* Background radial soft lights */}
       <div 
