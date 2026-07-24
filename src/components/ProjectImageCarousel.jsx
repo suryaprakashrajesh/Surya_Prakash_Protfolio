@@ -110,38 +110,54 @@ export function ProjectImageCarousel({ images = [], image, title, onImageClick }
           />
         </AnimatePresence>
 
-        {/* Hover overlay hint */}
+        {/* Expand / Fullscreen Badge Button */}
+        <div className="absolute top-2.5 right-2.5 z-20">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onImageClick && onImageClick(currentImage, currentIndex, imageList);
+            }}
+            className="p-1.5 rounded-lg bg-black/70 hover:bg-black/90 text-accent border border-white/20 shadow-md backdrop-blur-md flex items-center gap-1 font-mono text-[10px] cursor-pointer"
+            aria-label="View full screen"
+          >
+            <FiMaximize2 className="w-3.5 h-3.5 text-accent" />
+            <span className="inline sm:hidden font-medium">Full Screen</span>
+          </button>
+        </div>
+
+        {/* Hover overlay hint (desktop) */}
         <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/20 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3.5 pointer-events-none z-10">
           <span className="font-mono text-[10px] text-text bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded border border-border flex items-center gap-1.5 shadow-md">
-            <FiMaximize2 className="w-3 h-3 text-accent" /> Click to view full screen
+            <FiMaximize2 className="w-3 h-3 text-accent" /> Tap to view full screen
           </span>
         </div>
 
         {/* Navigation Arrows (rendered only if multiple images) */}
         {hasMultipleImages && (
           <>
-            {/* Left Chevron Button */}
+            {/* Left Chevron Button - Always visible on mobile, hover on desktop */}
             <button
               type="button"
               onClick={handlePrev}
               aria-label="Previous image"
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 border border-white/15 text-accent opacity-0 group-hover/img:opacity-100 focus:opacity-100 transition-all duration-300 flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 text-accent opacity-100 sm:opacity-0 sm:group-hover/img:opacity-100 focus:opacity-100 transition-all duration-300 flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
             >
               <FiChevronLeft className="w-5 h-5 text-accent stroke-[2.5]" />
             </button>
 
-            {/* Right Chevron Button */}
+            {/* Right Chevron Button - Always visible on mobile, hover on desktop */}
             <button
               type="button"
               onClick={handleNext}
               aria-label="Next image"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 border border-white/15 text-accent opacity-0 group-hover/img:opacity-100 focus:opacity-100 transition-all duration-300 flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 text-accent opacity-100 sm:opacity-0 sm:group-hover/img:opacity-100 focus:opacity-100 transition-all duration-300 flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-sm"
             >
               <FiChevronRight className="w-5 h-5 text-accent stroke-[2.5]" />
             </button>
 
             {/* Pagination Dots */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15">
               {imageList.map((_, idx) => (
                 <button
                   key={idx}

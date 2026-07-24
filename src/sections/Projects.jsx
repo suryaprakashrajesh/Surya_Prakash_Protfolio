@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX, FiCheckCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
@@ -377,93 +378,109 @@ export function Projects() {
 
       </div>
 
-      {/* Full-Screen Image Lightbox Modal */}
-      <AnimatePresence>
-        {activeModalImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={() => setActiveModalImage(null)}
-            className="fixed inset-0 z-[99999] bg-bg/90 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-8 cursor-zoom-out select-none"
-          >
-            {/* Top Controls Bar */}
-            <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center space-x-3 z-10">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveModalImage(null);
-                }}
-                className="p-2.5 rounded-full bg-card/90 text-text hover:text-accent border border-border hover:border-accent transition-colors duration-200 shadow-xl cursor-pointer flex items-center gap-2 font-mono text-xs"
-                aria-label="Close full screen view"
-              >
-                <span className="hidden sm:inline">Close (ESC)</span>
-                <FiX className="w-5 h-5 text-accent" />
-              </button>
-            </div>
-
-            {/* Title Header */}
-            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10 pointer-events-none">
-              <h4 className="text-lg md:text-xl font-display font-bold text-text">
-                {activeModalImage.title}
-              </h4>
-              <span className="font-mono text-xs text-text-secondary">
-                Full Screen Showcase {activeModalImage.list?.length > 1 ? `(${activeModalImage.list.indexOf(activeModalImage.src) + 1}/${activeModalImage.list.length})` : ''}
-              </span>
-            </div>
-
-            {/* Image Container */}
+      {/* Full-Screen Image Lightbox Modal rendered at root body via Portal */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {activeModalImage && (
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-              className="max-w-6xl max-h-[85vh] overflow-hidden rounded-2xl border border-border/80 shadow-2xl bg-card relative cursor-default flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setActiveModalImage(null)}
+              className="fixed inset-0 z-[999999] bg-bg/95 backdrop-blur-xl flex flex-col items-center justify-between p-3 sm:p-6 md:p-8 cursor-zoom-out select-none"
             >
-              <img
-                src={activeModalImage.src}
-                alt={activeModalImage.title}
-                className="w-full h-auto object-contain max-h-[82vh] rounded-xl"
-              />
+              {/* Header Controls Bar */}
+              <div 
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-6xl flex items-center justify-between z-30 pb-3 border-b border-border/40"
+              >
+                <div className="flex flex-col pr-3 overflow-hidden">
+                  <h4 className="text-sm sm:text-lg md:text-xl font-display font-bold text-text truncate">
+                    {activeModalImage.title}
+                  </h4>
+                  <span className="font-mono text-[10px] sm:text-xs text-text-secondary">
+                    Full Screen Showcase {activeModalImage.list?.length > 1 ? `(${activeModalImage.list.indexOf(activeModalImage.src) + 1}/${activeModalImage.list.length})` : ''}
+                  </span>
+                </div>
 
-              {/* Lightbox Navigation controls if multiple images */}
-              {activeModalImage.list && activeModalImage.list.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
-                      const prevIdx = currentIdx === 0 ? activeModalImage.list.length - 1 : currentIdx - 1;
-                      setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[prevIdx] });
-                    }}
-                    aria-label="Previous image"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 hover:bg-black/95 border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-sm"
-                  >
-                    <FiChevronLeft className="w-6 h-6 text-accent" />
-                  </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveModalImage(null);
+                  }}
+                  className="p-2 sm:px-3 sm:py-2 rounded-xl bg-card text-text hover:text-accent border border-border hover:border-accent transition-colors duration-200 shadow-lg cursor-pointer flex items-center gap-1.5 font-mono text-xs shrink-0"
+                  aria-label="Close full screen view"
+                >
+                  <span className="hidden sm:inline">Close</span>
+                  <FiX className="w-5 h-5 text-accent" />
+                </button>
+              </div>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
-                      const nextIdx = currentIdx === activeModalImage.list.length - 1 ? 0 : currentIdx + 1;
-                      setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[nextIdx] });
-                    }}
-                    aria-label="Next image"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 hover:bg-black/95 border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-sm"
-                  >
-                    <FiChevronRight className="w-6 h-6 text-accent" />
-                  </button>
-                </>
-              )}
+              {/* Image Container */}
+              <motion.div
+                initial={{ scale: 0.94, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.94, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-6xl flex-grow my-auto flex items-center justify-center relative overflow-hidden p-1 sm:p-4 cursor-default"
+              >
+                <img
+                  src={activeModalImage.src}
+                  alt={activeModalImage.title}
+                  className="max-w-full max-h-[72vh] sm:max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-border/60"
+                />
+
+                {/* Lightbox Navigation controls if multiple images */}
+                {activeModalImage.list && activeModalImage.list.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
+                        const prevIdx = currentIdx === 0 ? activeModalImage.list.length - 1 : currentIdx - 1;
+                        setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[prevIdx] });
+                      }}
+                      aria-label="Previous image"
+                      className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-black border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-md transition-transform hover:scale-110 active:scale-95"
+                    >
+                      <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const currentIdx = activeModalImage.list.indexOf(activeModalImage.src);
+                        const nextIdx = currentIdx === activeModalImage.list.length - 1 ? 0 : currentIdx + 1;
+                        setActiveModalImage({ ...activeModalImage, src: activeModalImage.list[nextIdx] });
+                      }}
+                      aria-label="Next image"
+                      className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-black border border-white/20 text-accent flex items-center justify-center shadow-xl cursor-pointer backdrop-blur-md transition-transform hover:scale-110 active:scale-95"
+                    >
+                      <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                    </button>
+                  </>
+                )}
+              </motion.div>
+
+              {/* Bottom Footer Indicator */}
+              <div 
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-6xl text-center py-2 z-30"
+              >
+                <span className="font-mono text-[10px] text-text-secondary">
+                  Tap anywhere outside or press ESC / Close to exit full screen
+                </span>
+              </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

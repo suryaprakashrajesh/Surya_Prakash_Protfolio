@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Contact', id: 'contact' },
 ];
 
-export function Navbar({ theme, toggleTheme }) {
+export function Navbar({ theme, toggleTheme, introComplete = true }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
@@ -61,7 +61,10 @@ export function Navbar({ theme, toggleTheme }) {
   };
 
   return (
-    <nav
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
         scrolled
           ? 'glass-nav border-b border-border py-4 shadow-sm'
@@ -189,6 +192,6 @@ export function Navbar({ theme, toggleTheme }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

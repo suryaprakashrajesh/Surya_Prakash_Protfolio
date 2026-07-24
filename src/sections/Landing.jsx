@@ -38,10 +38,10 @@ export function Landing() {
 
       {/* Main page content is mounted immediately in the DOM */}
       <div className="flex flex-col min-h-screen relative z-10">
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
+        <Navbar theme={theme} toggleTheme={toggleTheme} introComplete={!showIntro} />
         
         <main className="flex-grow">
-          <Hero theme={theme} toggleTheme={toggleTheme} />
+          <Hero theme={theme} toggleTheme={toggleTheme} introComplete={!showIntro} />
           <PixelRevealTransition theme={theme} targetColorType="surface" startOffset="normal" />
           <About />
           <PixelRevealTransition theme={theme} targetColorType="bg" startOffset="late" />

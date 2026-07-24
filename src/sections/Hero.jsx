@@ -10,7 +10,7 @@ const words = [
   "UI/UX Engineer"
 ];
 
-export function Hero({ theme, toggleTheme }) {
+export function Hero({ theme, toggleTheme, introComplete = true }) {
   const { name, subtitle, degree, cgpa, location, availableForFullTime } = portfolioData.personalInfo;
   
   // Typing Effect State
@@ -71,7 +71,7 @@ export function Hero({ theme, toggleTheme }) {
   const switchRippleControls = useAnimation();
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || !introComplete) return;
 
     // Sequence to animate pointer finger to point at the theme switch, click, and fade out
     const sequence = async () => {
@@ -80,7 +80,7 @@ export function Hero({ theme, toggleTheme }) {
         x: 0,
         y: 0,
         opacity: 1,
-        transition: { delay: 1.5, duration: 1.0, ease: 'easeOut' }
+        transition: { delay: 1.8, duration: 1.0, ease: 'easeOut' }
       });
       // 2. Click (scale down slightly)
       await cursorControls.start({
@@ -108,7 +108,7 @@ export function Hero({ theme, toggleTheme }) {
     };
 
     sequence();
-  }, [cursorControls, switchRippleControls, prefersReducedMotion]);
+  }, [cursorControls, switchRippleControls, prefersReducedMotion, introComplete]);
 
   const handleScrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -147,8 +147,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* Greeting Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
             className="flex items-center space-x-2.5 mb-5"
           >
             <span className="w-8 h-[1px] bg-accent" />
@@ -160,8 +160,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* Core Name Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
             className="text-5xl md:text-7xl font-display font-extrabold tracking-tight mb-4"
           >
             {name}
@@ -170,8 +170,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* Animated Typing Role Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, delay: 0.25 }}
             className="h-10 md:h-12 flex items-center mb-6"
           >
             <span className="font-display text-2xl md:text-3xl font-semibold text-text-secondary">
@@ -185,8 +185,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* Subheading Narrative */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, delay: 0.35 }}
             className="text-lg text-text-secondary leading-relaxed max-w-xl mb-8"
           >
             {subtitle}
@@ -195,8 +195,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* Meta Information Tags */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, delay: 0.45 }}
             className="flex flex-wrap gap-3 mb-10 text-xs font-mono"
           >
             <div className="px-3.5 py-1.5 rounded-full bg-surface border border-border text-text-secondary flex items-center space-x-2">
@@ -218,8 +218,8 @@ export function Hero({ theme, toggleTheme }) {
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.55, delay: 0.55 }}
             className="flex flex-wrap gap-4 w-full sm:w-auto"
           >
             <button
@@ -249,11 +249,11 @@ export function Hero({ theme, toggleTheme }) {
           </motion.div>
         </div>
 
-        {/* Right Column: Signature Micro-interaction Browser Card */}
+        {/* Right Column: Step 7 Signature Micro-interaction Browser Card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          initial={{ opacity: 0, x: 60, scale: 0.92 }}
+          animate={introComplete ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: 60, scale: 0.92 }}
+          transition={{ type: "spring", damping: 20, stiffness: 180, delay: 0.65 }}
           className="lg:col-span-5 flex justify-center lg:justify-end select-none relative"
         >
           {/* Main "Browser Chrome" Card container */}
