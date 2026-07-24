@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiFolder, FiMonitor, FiCpu, FiMaximize2, FiX, FiCheckCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { portfolioData } from '../data/portfolioData';
 
-// Beniyel Nikson Portfolio Images
-import beniyelImg1 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio.png';
-import beniyelImg2 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_2.png';
-import beniyelImg3 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_3.png';
-import beniyelImg4 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_4.png';
-import beniyelImg5 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_5.png';
+// Beniyel Nikson Portfolio Images (Commented out)
+// import beniyelImg1 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio.png';
+// import beniyelImg2 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_2.png';
+// import beniyelImg3 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_3.png';
+// import beniyelImg4 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_4.png';
+// import beniyelImg5 from '../assets/images/beniyel_nikson_portfolio/beniyel_nikson_portfolio_5.png';
 
 // Flawless Photography Images
 import flawlessImg1 from '../assets/images/fawless_photography/fawless_photography.png';
@@ -206,7 +206,7 @@ export function Projects() {
   // Map project IDs to imported image arrays for Vite bundling
   const getProjectImages = (project) => {
     if (project.id === 'beniyel-nikson') {
-      return [beniyelImg1, beniyelImg2, beniyelImg3, beniyelImg4, beniyelImg5];
+      return (project.images && project.images.length > 0) ? project.images : [];
     }
     if (project.id === 'flawless-photography') {
       return [flawlessImg1, flawlessImg2, flawlessImg3, flawlessImg4, flawlessImg5];
